@@ -8,14 +8,14 @@ export async function voiceInput(onStatus,onText,onState){
  if(location.protocol==='file:'){onStatus('请通过本地服务或 HTTPS 网页使用语音续玩。');return;}
  const token=++session;busy=true;onState('preparing');onStatus('正在准备麦克风，请保持按住…');let stream;
  try{
- const check=await fetch('/api/asr/status');if(!check.ok)throw Error('语音服务未启动');const config=await check.json();if(!config.configured)throw Error('尚未配置阿里云语音密钥');if(token!==session)return;
+ const check=await fetch('api/asr/status');if(!check.ok)throw Error('语音服务未启动');const config=await check.json();if(!config.configured)throw Error('尚未配置阿里云语音密钥');if(token!==session)return;
  if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder)throw Error('当前浏览器无法录音，请使用 HTTPS 或 localhost');
  stream=await navigator.mediaDevices.getUserMedia({audio:true});if(token!==session){stream.getTracks().forEach(t=>t.stop());return;}
  const recorder=new MediaRecorder(stream),chunks=[],current={recorder,stream};recording=current;
  recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
  recorder.onerror=()=>{if(token!==session)return;cancelVoice();onStatus('录音失败，请重新按住麦克风。');};
  recorder.onstop=async()=>{clearTimeout(current.timer);stream.getTracks().forEach(t=>t.stop());if(token!==session)return;recording=null;onState('processing');onStatus('正在识别…');request=new AbortController();let ctx;
- try{ctx=new (window.AudioContext||window.webkitAudioContext)();const decoded=await ctx.decodeAudioData(await new Blob(chunks).arrayBuffer());const wav=encodeWav(decoded);await ctx.close();ctx=null;if(token!==session)return;const response=await fetch('/api/asr',{method:'POST',headers:{'Content-Type':'audio/wav'},body:wav,signal:request.signal});const result=await response.json();if(!response.ok)throw Error(result.error||'识别失败');if(token===session){onState('idle');onText(result.text);}}
+ try{ctx=new (window.AudioContext||window.webkitAudioContext)();const decoded=await ctx.decodeAudioData(await new Blob(chunks).arrayBuffer());const wav=encodeWav(decoded);await ctx.close();ctx=null;if(token!==session)return;const response=await fetch('api/asr',{method:'POST',headers:{'Content-Type':'audio/wav'},body:wav,signal:request.signal});const result=await response.json();if(!response.ok)throw Error(result.error||'识别失败');if(token===session){onState('idle');onText(result.text);}}
  catch(e){if(token===session){onState('idle');onStatus(e.message||'没有听清，请再试一次。');}}
  finally{if(ctx)await ctx.close();if(token===session){request=null;busy=false;}}};
  recorder.start();onState('recording');onStatus('正在聆听，松手自动识别…');current.timer=setTimeout(()=>{if(recorder.state==='recording')recorder.stop();},6000);
