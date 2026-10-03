@@ -26,3 +26,5 @@ falling.body.position.y=context.activeBounds.ground-1;falling.body.velocity.set(
 assert.equal(falling.landed,true);assert.equal(falling.dropDone,true);assert.equal(falling.mesh.scale.x,falling.baseScale.x);
 context.tickPour(.5);assert.equal(context.status,'playing');assert.equal(sounds,1);
 console.log('PASS: screen-normal launch, elevated spawn, floor landing and audio until settled');
+
+context.status='pouring';context.settleTime=0;falling.landed=true;falling.dropDone=false;context.tickPour(.12);assert.equal(sounds,1);assert.equal(context.status,'pouring');console.log('PASS: drop sound ends on landing even while objects are settling');
