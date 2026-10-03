@@ -1,16 +1,10 @@
 node_modules/
 .venv/
 .DS_Store
+
 .env
 .env.*
 !.env.example
-assets/cad/
-*.stp
-*.step
-*.mp4
-抓个矽递-3D.html
-web-publish/
-*.tar.gz
 
 # Generated previews and deployment archives
 preview*.jpg
@@ -19,3 +13,5 @@ previews/
 seeed-site*.tar.gz
 
 recordings/
+
+analytics/

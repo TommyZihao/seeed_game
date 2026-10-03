@@ -1,0 +1,21 @@
+[Unit]
+Description=Seeed Game Speech API
+After=network-online.target
+[Service]
+User=www-data
+WorkingDirectory=/opt/seeed-game
+EnvironmentFile=/etc/seeed-game.env
+Environment=ASR_RECORDINGS_DIR=/var/lib/seeed-game/recordings
+Environment=PLAYER_STATS_FILE=/var/lib/seeed-game/analytics/players.json
+StateDirectory=seeed-game
+StateDirectoryMode=0700
+UMask=0077
+ExecStart=/usr/bin/node /opt/seeed-game/server.mjs
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+[Install]
+WantedBy=multi-user.target
