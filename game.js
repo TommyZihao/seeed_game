@@ -13,7 +13,7 @@ import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import * as CANNON from 'cannon-es';
 const $=id=>document.getElementById(id);
 let revivalTimer=0;function cancelVoice(){clearTimeout(revivalTimer);cancelVoiceInput();}
-const gameAudio=new GameAudio();const catalogAudio=new GameAudio(window.SEEED_CATALOG_AUDIO_DATA||'assets/audio/catalog-yeyeye.mp3');const playSound=(name,type=0)=>gameAudio.play(name,type);for(const event of ['pointerdown','pointerup','click','keydown'])document.addEventListener(event,()=>{gameAudio.unlock();if(inspecting)catalogAudio.unlock();},{capture:true,passive:true});
+const gameAudio=new GameAudio();const catalogAudio=new GameAudio(window.SEEED_CATALOG_AUDIO_DATA||'assets/audio/catalog-yeyeye.mp3');const playSound=(name,type=0)=>gameAudio.play(name,type);for(const event of ['pointerdown','pointerup','click','keydown'])document.addEventListener(event,()=>{if(inspecting)catalogAudio.unlock();else gameAudio.unlock();},{capture:true,passive:true});
 const products=[
  {key:'so101-black',name:'SO-101 主动臂',source:'TheRobotStudio 官方 URDF / STL',size:2.22},
  {key:'so101-white',name:'SO-101 从动臂',source:'TheRobotStudio 官方 URDF / STL',size:2.22},
