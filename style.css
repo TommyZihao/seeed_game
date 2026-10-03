@@ -136,3 +136,8 @@
 /* Theme captions stay readable on each work surface. */
 #game[data-theme="assembly"] .bench-label,#game[data-theme="laboratory"] .bench-label,#game[data-theme="seeed"] .bench-label,#game[data-theme="lerobot"] .bench-label{color:#465367;text-shadow:0 1px 2px #ffffffaa}
 .bench-label{font-size:12px;font-weight:700;letter-spacing:1px}
+
+.scene-picker{display:flex;flex-direction:column;gap:6px;margin:12px 0 18px;text-align:left;font-size:12px;font-weight:700;color:#796344}.scene-picker[hidden]{display:none}.scene-picker select{width:100%;padding:10px 12px;border:2px solid #d5b981;border-radius:12px;background:#fff9e6;color:#514336;font:inherit;font-size:13px;cursor:pointer}#game[data-theme="enamel"] .bench-label,#game[data-theme="rattan"] .bench-label,#game[data-theme="timber"] .bench-label,#game[data-theme="fabric"] .bench-label{color:#493e32;text-shadow:0 1px 2px #fff8df}
+
+/* Scene names remain in the pause selector; keep the product name unobstructed. */
+.bench-label{display:none!important}
