@@ -15,7 +15,7 @@ export const sceneThemes={
  galvanized:{name:'水泥地面 · 镀锌金属盆',shape:'galvanized',color:0x9eaeb5,base:'#989b96',line:'#5c6964',pattern:'concrete'},
  rattan:{name:'野餐格布 · 蜜糖藤编筐',shape:'rattan',color:0xb88241,base:'#eee1bc',line:'#bd655b',pattern:'gingham'},
  fabric:{name:'软木桌面 · 帆布收纳箱',shape:'fabric',color:0x6e8174,base:'#b89a72',line:'#765c3e',pattern:'cork'},
- lerobot:{name:'机器人装配室 · 紫色六角装配盒',shape:'hexagon',color:0x9981c8,base:'#dde4f2',line:'#b7b4d5',pattern:'grid'}
+ lerobot:{name:'机器人装配室 · 加宽蓝绿深箱',shape:'widecrate',color:0x58a8ad,base:'#dce8ec',line:'#9db9c7',pattern:'blueprint'}
 };
 function surfaceTexture(theme){const c=document.createElement('canvas');c.width=c.height=512;const g=c.getContext('2d');g.fillStyle=theme.base;g.fillRect(0,0,512,512);g.strokeStyle=theme.line;g.globalAlpha=.4;g.lineWidth=2;
  for(let i=0;i<=512;i+=theme.pattern==='tile'?128:32){g.beginPath();if(theme.pattern==='wood'){g.moveTo(0,i);g.bezierCurveTo(180,i-7,350,i+7,512,i);}else if(theme.pattern==='stripe'){g.moveTo(i-512,0);g.lineTo(i,512);g.moveTo(i,0);g.lineTo(i+512,512);}else{g.moveTo(i,0);g.lineTo(i,512);g.moveTo(0,i);g.lineTo(512,i);}g.stroke();}

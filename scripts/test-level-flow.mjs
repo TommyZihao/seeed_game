@@ -14,3 +14,4 @@ console.log('PASS: four levels, win actions, zone/stew routing and scaled physic
 context.start('stew');for(let type=0;type<products.length;type++){const item=context.spawn(type,type);assert.equal(item.mesh.scale.x,1);assert.equal(item.mesh.userData.half.x,templates[type].userData.half.x);assert.ok(item.body.velocity.y<=-1.2);}console.log('PASS: all 24 stew products restored to original sizes with matching bounds');
 
 context.start('nvidia');for(let type=0;type<products.length;type++)assert.equal(context.spawn(type,type).mesh.scale.x,1.62);console.log('PASS: all non-stew products reduced by 10 percent');
+context.start('seeed');const watcherType=products.findIndex(p=>p.key==='watcher');assert.equal(context.pendingDeck.filter(t=>t===watcherType).length,12);console.log('PASS: Seeed zone includes 12 SenseCAP Watcher products');
