@@ -11,3 +11,9 @@ assets/cad/
 抓个矽递-3D.html
 web-publish/
 *.tar.gz
+
+# Generated previews and deployment archives
+preview*.jpg
+preview*.png
+previews/
+seeed-site*.tar.gz
