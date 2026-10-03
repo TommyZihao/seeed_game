@@ -1,0 +1,25 @@
+{
+  "name": "seeed-catch-3d",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "models": "node scripts/convert-cad.cjs",
+    "serve": "node server.mjs"
+  },
+  "dependencies": {
+    "@gltf-transform/core": "^4.5.1",
+    "@gltf-transform/extensions": "^4.5.1",
+    "@gltf-transform/functions": "^4.5.1",
+    "cannon-es": "^0.20.0",
+    "draco3dgltf": "^1.5.7",
+    "fast-xml-parser": "^5.11.2",
+    "meshoptimizer": "^1.3.0",
+    "occt-import-js": "^0.0.23",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

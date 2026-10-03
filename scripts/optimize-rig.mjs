@@ -1,0 +1,3 @@
+import {NodeIO} from '@gltf-transform/core';import {dedup,weld,simplify,prune,normals} from '@gltf-transform/functions';import {MeshoptSimplifier} from 'meshoptimizer';import fs from 'node:fs';
+await MeshoptSimplifier.ready;const io=new NodeIO();
+for(const name of process.argv.slice(2)){const file=`assets/models/${name}.glb`,d=await io.read(file);for(const mesh of d.getRoot().listMeshes())for(const primitive of mesh.listPrimitives())primitive.setAttribute('NORMAL',null);await d.transform(dedup(),weld(),simplify({simplifier:MeshoptSimplifier,ratio:.18,error:.002,lockBorder:false}),normals(),prune({keepLeaves:true}));await io.write(file,d);console.log(name,fs.statSync(file).size);}

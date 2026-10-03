@@ -1,0 +1,2 @@
+import trimesh,numpy as np
+p='assets/models/watcher.glb';m=trimesh.load(p,force='scene').to_geometry();v=m.vertices;lo,hi=np.quantile(v,[.01,.99],axis=0);margin=hi-lo;ok=np.all((v>=lo-margin*3)&(v<=hi+margin*3),axis=1);valid=np.all(ok[m.faces],axis=1);print('Remove remote construction geometry:',len(m.faces)-valid.sum());m.update_faces(valid);m.remove_unreferenced_vertices();m.apply_translation(-m.bounds.mean(0));m.apply_scale(2/np.max(m.extents));m.export(p)

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "reachy-mini.glb",
+    "source": "https://github.com/pollen-robotics/reachy-mini-desktop-app",
+    "url": "https://media.githubusercontent.com/media/pollen-robotics/reachy-mini-desktop-app/develop/src/assets/robot-3d/reachy_mini_viz.glb",
+    "bytes": 2980704,
+    "meshes": 397,
+    "status": "downloaded; assembly and license review pending"
+  },
+  {
+    "file": "microduck.glb",
+    "source": "https://huggingface.co/spaces/pollen-robotics/reachy-mini-3d-voice",
+    "url": "https://huggingface.co/spaces/pollen-robotics/reachy-mini-3d-voice/resolve/main/assets/microduck-companion.glb",
+    "bytes": 301684,
+    "meshes": 16,
+    "status": "downloaded; assembly and license review pending"
+  }
+]

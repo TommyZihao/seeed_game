@@ -1,0 +1,14 @@
+const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');const source=fs.readFileSync('game.js','utf8');
+const elements=new Map();const el=()=>({children:[],classList:{add(){},remove(){},toggle(){}},style:{},dataset:{},innerHTML:'',textContent:'',hidden:true,append(x){this.children.push(x)},setAttribute(){},focus(){},remove(){}});const context={assert,document:{createElement:el},setTimeout(fn){fn()},clearTimeout(){},console};vm.createContext(context);
+const c=vm.createContext({...context,elements,el});vm.runInContext(`const $=id=>{if(!elements.has(id))elements.set(id,el());return elements.get(id)}; const scene={remove(){}},world={removeBody(){}};const products=Array.from({length:12},(_,i)=>({name:'product '+i}));const thumbnails=products.map(()=>'');let runMode='campaign';let ready=true,status='playing',paused=false,locked=false,inspecting=false,items=[],tray=[],holding=[],removed=0,total=72,level=1,remaining=600,uses={remove:2,gather:2,shuffle:3},messageTimer;function playSound(){};function cancelVoice(){}function clearSelection(){};function start(){};function shuffleArray(a){return a};`,c);
+vm.runInContext(source.slice(source.indexOf('function update()'),source.indexOf('let selectedItem=')),c);
+vm.runInContext(`
+function productScreenPoint(){return null} function pickupJuice(){} function clearJuice(){}
+function reset(types){items=types.map((type,id)=>({id,type,mesh:{},body:{}}));tray=[];holding=[];removed=0;total=types.length;status='playing';paused=false;locked=false;uses={remove:2,gather:2,shuffle:3}}
+reset([0,0,0,1,1,1]);select(items[0]);select(items[0]);select(items[0]);assert.equal(removed,3);assert.equal(tray.length,0);assert.equal(status,'playing');
+select(items[0]);$('remove').onclick();assert.equal(holding.length,1);assert.equal(tray.length,0);assert.equal(uses.remove,1);select(holding[0],true);assert.equal(holding.length,0);assert.equal(tray.length,1);$('gather').onclick();assert.equal(status,'won');assert.equal(removed,6);
+reset([0,1,2,3,4,5,6,7]);for(let i=0;i<7;i++)select(items[0]);assert.equal(status,'lost');assert.equal(tray.length,7);
+reset([0,1,2,3,4,0,0,9]);for(let i=0;i<7;i++)select(items[0]);assert.equal(status,'playing');assert.equal(tray.length,4);assert.equal(removed,3);
+reset([0,0,0,1,1,1]);select(items[0]);paused=true;select(items[0]);assert.equal(tray.length,1);paused=false;$('gather').onclick();assert.equal(tray.length,0);assert.equal(items.length,3);assert.equal(removed,3);
+reset([0,0,0,1,1,1]);status='pouring';select(items[0]);assert.equal(tray.length,1);select(items[0]);select(items[0]);assert.equal(removed,3);assert.equal(status,'pouring');assert.equal(items.length,3);
+console.log('PASS: triples, 7th-slot match before failure, full-slot failure, pause, storage/retrieve, gather, win');`,c);

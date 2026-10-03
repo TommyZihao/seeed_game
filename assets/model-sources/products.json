@@ -1,0 +1,152 @@
+[
+  {
+    "product": "SO-101 粉色主动臂",
+    "file": "so101-black.glb",
+    "source": "https://github.com/TheRobotStudio/SO-ARM100/tree/main/Simulation/SO101",
+    "processing": "Official URDF geometry; pink printed parts, dark servos; reduced mesh"
+  },
+  {
+    "product": "SO-101 金黄色从动臂",
+    "file": "so101-white.glb",
+    "source": "https://github.com/TheRobotStudio/SO-ARM100/tree/main/Simulation/SO101",
+    "processing": "Official URDF geometry; golden-yellow printed parts, dark servos; reduced mesh"
+  },
+  {
+    "product": "reBot Arm B601-RS",
+    "file": "rebot.glb",
+    "source": "https://github.com/Seeed-Projects/reBot-DevArm/tree/main/Rebot_Arm_description/RS",
+    "processing": "Official URDF assembly with source material colors; mesh reduction"
+  },
+  {
+    "product": "XIAO ESP32-C3",
+    "file": "xiao.glb",
+    "source": "https://tscircuit.com/vinjocarsales/xiao-series/blob/assets/xiao-esp32-c3.step",
+    "processing": "Seeed Studio XIAO-ESP32-C3 v15 STEP via public model mirror; half previous gameplay size",
+    "appearance": "Runtime reconstructed product colors and material response; XIAO printed shield decal and Watcher LCD/lens added; not manufacturer-supplied PBR texture maps"
+  },
+  {
+    "product": "MicroDuck",
+    "file": "microduck.glb",
+    "source": "https://huggingface.co/spaces/pollen-robotics/reachy-mini-3d-voice/blob/main/assets/microduck-companion.glb",
+    "processing": "Original CAD-derived GLB joint hierarchy preserved; runtime alternating hip/knee/ankle gait"
+  },
+  {
+    "product": "Reachy Mini",
+    "file": "reachy-mini.glb",
+    "source": "https://github.com/pollen-robotics/reachy-mini-desktop-app/blob/develop/src/assets/robot-3d/reachy_mini_viz.glb",
+    "processing": "Official visualization GLB; Draco decode and mesh reduction"
+  },
+  {
+    "product": "reComputer Industrial",
+    "file": "recomputer.glb",
+    "source": "https://files.seeedstudio.com/products/NVIDIA/Industrial/reComputer-Industrial.stp",
+    "processing": "Official STEP assembly; tessellation and mesh reduction"
+  },
+  {
+    "product": "Jetson AGX Thor Developer Kit",
+    "file": "thor.glb",
+    "source": "https://developer.nvidia.com/downloads/assets/embedded/secure/jetson/thor/docs/Jetson_Thor_DevKit_V01.zip",
+    "processing": "NVIDIA Developer Kit STEP; tessellation",
+    "appearance": "Runtime reconstructed product colors and material response; XIAO printed shield decal and Watcher LCD/lens added; not manufacturer-supplied PBR texture maps"
+  },
+  {
+    "product": "Jetson Orin Nano Developer Kit",
+    "file": "orin.glb",
+    "source": "https://developer.nvidia.com/downloads/assets/embedded/secure/jetson/orin_nano/docs/jetson_orin_nano_devkit_3d_step_model.zip/",
+    "processing": "NVIDIA Developer Kit STEP; tessellation",
+    "appearance": "Runtime reconstructed product colors and material response; XIAO printed shield decal and Watcher LCD/lens added; not manufacturer-supplied PBR texture maps"
+  },
+  {
+    "product": "SenseCAP Watcher",
+    "file": "watcher.glb",
+    "source": "https://github.com/Seeed-Studio/OSHW-SenseCAP-Watcher/blob/main/Hardware/SenseCAP_Watcher-3D-Shell_v1.stp",
+    "processing": "Extracted body assembly label 2 from official STEP; mounting bracket excluded",
+    "appearance": "Runtime reconstructed product colors and material response; XIAO printed shield decal and Watcher LCD/lens added; not manufacturer-supplied PBR texture maps"
+  },
+  {
+    "product": "LeKiwi Robot Kit",
+    "file": "lekiwi.glb",
+    "source": "https://github.com/SIGRobotics-UIUC/LeKiwi/tree/main/URDF",
+    "processing": "Official URDF assembly; mesh reduction",
+    "selection": "Selected wheeled robot kit sold by Seeed Studio; not the 4WD Mecanum model"
+  },
+  {
+    "product": "树莓派 5",
+    "file": "pi5.glb",
+    "source": "https://datasheets.raspberrypi.com/rpi5/RaspberryPi5-step.zip",
+    "processing": "Source product mesh with game-ready reduction; product colors and materials retained or reconstructed"
+  },
+  {
+    "product": "飞特 STS3215 舵机",
+    "file": "sts3215.glb",
+    "source": "https://github.com/TheRobotStudio/SO-ARM100/tree/main/Simulation/SO101/assets",
+    "processing": "Source product mesh with game-ready reduction; product colors and materials retained or reconstructed"
+  },
+  {
+    "product": "Arduino UNO Q",
+    "file": "uno-q.glb",
+    "source": "https://docs.arduino.cc/resources/models/ABX00162-step.zip",
+    "processing": "Source product mesh with game-ready reduction; product colors and materials retained or reconstructed"
+  },
+  {
+    "product": "NVIDIA DGX Spark",
+    "file": "dgx-spark.glb",
+    "source": "https://wendy.dev/blog/free-nvidia-dgx-spark-3d-model",
+    "processing": "Source product mesh with game-ready reduction; product colors and materials retained or reconstructed",
+    "appearance": "Restored original champagne gold PBR materials"
+  },
+  {
+    "product": "地瓜 RDK X5",
+    "file": "rdk-x5.glb",
+    "source": "https://archive.d-robotics.cc/downloads/hardware/rdk_x5/RDK_X5_LPDDR4_4266MHz_V1P0_pcb.stp",
+    "processing": "Source product mesh with game-ready reduction; product colors and materials retained or reconstructed"
+  },
+  {
+    "product": "高擎动力 Mini Pi",
+    "file": "mini-pi.glb",
+    "source": "https://github.com/HighTorque-Robotics/robot_urdf/tree/main/pi_12dof",
+    "processing": "Official URDF/STL with joint hierarchy preserved; alternating hip, knee and ankle walking animation"
+  },
+  {
+    "product": "高擎动力 Mini Pi Plus",
+    "file": "mini-pi-plus.glb",
+    "source": "https://github.com/HighTorque-Robotics/HT_Robot_URDF/tree/main/pi_plus_24dof",
+    "processing": "Official standard URDF/STL; all body parts warm yellow-beige per user preference"
+  },
+  {
+    "product": "高擎动力 Panthera HT",
+    "file": "panthera-ht.glb",
+    "source": "https://github.com/HighTorque-Robotics/Panthera-HT_ROS2",
+    "processing": "Official mesh geometry and gripper assembly; metal and black finishes reconstructed from official product photographs; posed and decimated"
+  },
+  {
+    "product": "古月居 OriginBot",
+    "file": "originbot.glb",
+    "source": "https://github.com/guyuehome/originbot_desktop",
+    "processing": "Official URDF/STL, navigation kit with lidar; vertex colors reconstructed against official product photograph"
+  },
+  {
+    "product": "幻尔 TonyPi Pro",
+    "file": "tonypi.glb",
+    "source": "https://github.com/pab47/TonyPi",
+    "processing": "Community MJCF/STL derived from HiWonder STP, credited by author to Salvador Echeveste; simulation visual hulls with CAD-derived servo dimensions, reconstructed product finishes. Pro gripper variant, not manufacturer-original detailed STEP."
+  },
+  {
+    "file": "milk-bottle.glb",
+    "name": "高擎动力 奶瓶机器人",
+    "source": "用户提供：夹爪奶瓶.stp",
+    "license": "用户提供素材"
+  },
+  {
+    "file": "prime-q1.glb",
+    "name": "启元 Q1",
+    "source": "https://dev.primebot.com/download",
+    "download": "https://csdn-tos.primebot.com/qiyuan/2026/09/24/70056d2506d74ca7a8287a078cd6e7be.zip"
+  },
+  {
+    "file": "prime-t1.glb",
+    "name": "启元 T1",
+    "source": "https://dev.primebot.com/download",
+    "download": "https://csdn-tos.primebot.com/qiyuan/2026/09/24/eb05fee7baa144b2a09843220d4676d6.zip"
+  }
+]
