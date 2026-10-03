@@ -11,3 +11,5 @@ for(const shape of ['basket','enamel','galvanized','hexagon','widecrate','stew']
 }
 assert.ok(Math.max(...containerBounds('hexagon').planes.map(p=>p.hi))>4.3);
 console.log('PASS: random drops, tilted product corners inside six container types, floor clearance and inward collision normals');
+const bounds=containerBounds('basket'),pile=Array.from({length:9},(_,i)=>({body:{position:new C.Vec3((i%3-1)*1.2,3,-2-Math.floor(i/3)*.5),quaternion:new C.Quaternion()},mesh:{userData:{half:{x:.7,y:.7,z:.7}}}}));
+const drops=Array.from({length:80},()=>randomDrop(bounds,{x:.5,y:.5,z:.5},random,pile));assert.ok(drops.reduce((sum,p)=>sum+p.z,0)/drops.length>.5,'prefer available front space over tall rear pile');assert.ok(drops.every(p=>p.surface<0),'spawn height follows local free surface');console.log('PASS: random placement favors empty front area over an existing tall rear pile');
