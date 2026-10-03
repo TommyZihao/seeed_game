@@ -15,3 +15,5 @@ seeed-site*.tar.gz
 recordings/
 
 analytics/
+
+dist-server/

@@ -1,0 +1,17 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {build} from 'esbuild';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const out=path.join(root,'dist-server'),pub=path.join(out,'public');
+await fs.mkdir(pub,{recursive:true});
+await build({absWorkingDir:root,entryPoints:['game.js'],outfile:path.join(pub,'game.js'),bundle:true,format:'esm',minify:true,target:'es2022'});
+const version=Date.now().toString();
+let html=await fs.readFile(path.join(root,'index.html'),'utf8');
+html=html.replace(/<script type="importmap">[\s\S]*?<\/script>/,'').replace('href="style.css"',`href="style.css?v=${version}"`).replace('src="game.js"',`src="game.js?v=${version}"`);
+await fs.writeFile(path.join(pub,'index.html'),html);
+await fs.copyFile(path.join(root,'style.css'),path.join(pub,'style.css'));
+await fs.cp(path.join(root,'assets'),path.join(pub,'assets'),{recursive:true});
+for(const file of ['server.mjs','recording-store.mjs','player-store.mjs'])await fs.copyFile(path.join(root,file),path.join(out,file));
+await fs.copyFile(path.join(root,'scripts/player-stats.mjs'),path.join(out,'player-stats.mjs'));
+console.log(`服务器发布包：${out}`);
