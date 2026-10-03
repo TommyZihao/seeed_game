@@ -1,7 +1,7 @@
 import {containerBounds,containBody,randomDrop} from '../container-physics.js';
 import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';import * as THREE from 'three';import * as CANNON from 'cannon-es';import {campaignLevels,zoneThemes}from '../game-levels.js';import {zones}from '../game-zones.js';
 const source=fs.readFileSync(new URL('../game.js',import.meta.url),'utf8');const products=vm.runInNewContext(source.slice(source.indexOf('const products='),source.indexOf('const scene=')).replace('const products=','products='));
-const nodes=new Map(),$=id=>{if(!nodes.has(id))nodes.set(id,{dataset:{},classList:{},setAttribute(){}});return nodes.get(id);};
+const nodes=new Map(),$=id=>{if(!nodes.has(id))nodes.set(id,{dataset:{},style:{},classList:{},setAttribute(){}});return nodes.get(id);};
 const templates=products.map(p=>{const m=new THREE.Mesh(new THREE.BoxGeometry(p.size,p.size,p.size));m.userData.half=new THREE.Vector3(p.size/2,p.size/2,p.size/2);return m;});
 const context={containerBounds,containBody,randomDrop,activeBounds:containerBounds(),THREE,CANNON,campaignLevels,zoneThemes,zones,products,templates,$,items:[],tray:[],holding:[],world:new CANNON.World(),scene:new THREE.Scene(),wok:new THREE.Group(),POT_STRETCH:1.18,activeLevel:null,activeRectangular:false,cancelVoice(){},clearSelection(){},update(){},message(){},playSound(){},setLevelScene(theme){context.theme=theme;context.activeRectangular=!['laboratory','nvidia','lerobot','stew'].includes(theme);}};
 vm.createContext(context);for(const name of ['spawn','start','shuffleArray','checkEnd'])vm.runInContext(source.split('\n').find(l=>l.startsWith(`function ${name}(`)),context);
@@ -11,7 +11,18 @@ for(const key of Object.keys(zones)){context.start(key);assert.equal(context.run
 context.start('stew');assert.equal(context.runMode,'stew');assert.equal(context.total,products.length*3);
 console.log('PASS: four levels, win actions, zone/stew routing and scaled physics without changing templates');
 
-context.start('stew');for(let type=0;type<products.length;type++){const item=context.spawn(type,type);assert.equal(item.mesh.scale.x,1);assert.equal(item.mesh.userData.half.x,templates[type].userData.half.x);assert.ok(item.body.velocity.y<=-1.2);}console.log('PASS: all 24 stew products restored to original sizes with matching bounds');
+context.start('stew');for(let type=0;type<products.length;type++){const item=context.spawn(type,type);assert.equal(item.mesh.scale.x,1);assert.equal(item.mesh.userData.half.x,templates[type].userData.half.x);assert.ok(item.body.velocity.y<0);}console.log('PASS: all 24 stew products restored to original sizes with matching bounds');
 
 context.start('nvidia');for(let type=0;type<products.length;type++)assert.equal(context.spawn(type,type).mesh.scale.x,1.62);console.log('PASS: all non-stew products reduced by 10 percent');
 context.start('seeed');const watcherType=products.findIndex(p=>p.key==='watcher');assert.equal(context.pendingDeck.filter(t=>t===watcherType).length,12);console.log('PASS: Seeed zone includes 12 SenseCAP Watcher products');
+
+vm.runInContext(source.slice(source.indexOf('function syncMeshes('),source.indexOf('function tickPour(')),context);
+vm.runInContext(source.split('\n').find(l=>l.startsWith('function tickPour(')),context);
+context.start(1);const falling=context.spawn(0,0);context.items=[falling];context.pendingDeck=[];
+assert.equal(falling.body.velocity.x,0);assert.equal(falling.body.velocity.z,0);
+assert.ok(falling.body.position.y>context.activeBounds.top+3);
+let sounds=0;context.playSound=()=>sounds++;context.tickPour(.12);assert.equal(sounds,1);assert.equal(context.status,'pouring');
+falling.body.position.y=context.activeBounds.ground-1;falling.body.velocity.set(0,-1,0);context.syncMeshes(.5);
+assert.equal(falling.landed,true);assert.equal(falling.dropDone,true);assert.equal(falling.mesh.scale.x,falling.baseScale.x);
+context.tickPour(.5);assert.equal(context.status,'playing');assert.equal(sounds,1);
+console.log('PASS: screen-normal launch, elevated spawn, floor landing and audio until settled');
