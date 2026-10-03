@@ -141,3 +141,5 @@
 
 /* Scene names remain in the pause selector; keep the product name unobstructed. */
 .bench-label{display:none!important}
+
+.catalog-open #hoverName{display:none!important}
